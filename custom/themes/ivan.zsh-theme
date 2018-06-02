@@ -1,9 +1,9 @@
-# Clean, simple, compatible and meaningful.
-# Tested on Linux, Unix and Windows under ANSI colors.
+# Tested on Linux, and OSX under ANSI colors.
 # It is recommended to use with a dark background.
 # Colors: black, red, green, yellow, *blue, magenta, cyan, and white.
 #
-# Mar 2013 Yad Smood
+# Based on ys by Yad Smood
+# Modified by Ivan Smirnov
 
 # VCS
 YS_VCS_PROMPT_PREFIX1=" %{$fg[white]%}on%{$reset_color%} "
