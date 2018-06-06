@@ -33,6 +33,29 @@ function vi_info(){
 # bind vi_info into lambda
 local shell_symbol='$(vi_info)'
 
+# These next two local variables allow us to split the working directory
+# into two sections. This is useful if you have a common prefix that you 
+# work in, since on an 80 char wide screen real estate is valuable
+# The following implementation is a noop, and will act the same as
+# %~. However, in ~/.zshrc.local you can define `dir_head` and `dir_tail`
+# to display more useful information.
+function load_dir_injections(){
+    # Inject head or empty string
+    if [[ -n $(declare -f dir_head) ]];then
+        dir_head_disp='$(dir_head)'
+    else
+        dir_head_disp='$(print "")'
+    fi
+
+    # Inject tail or entire directory
+    if [[ -n $(declare -f dir_tail) ]];then
+        dir_tail_disp='$(dir_tail)'
+    else
+        dir_tail_disp='$(print %~)'
+    fi
+}
+
+
 # Ensure that the prompt is redrawn when the terminal size changes.
 TRAPWINCH() {
   zle reset-prompt  
@@ -53,6 +76,7 @@ zle -N zle-keymap-select
 
 # Resources: http://www.nparikh.org/unix/prompt.php
 function export_prompt(){
+load_dir_injections
 # Prompt format:
 #
 # PRIVILEGES USER @ MACHINE in DIRECTORY on git:BRANCH STATE 
@@ -69,7 +93,8 @@ export PROMPT="
 %{$fg[white]%}at \
 %{$fg[green]%}%m \
 %{$fg[white]%}in \
-%{$terminfo[bold]$fg[yellow]%}%~%{$reset_color%}\
+%{$terminfo[bold]$fg[red]%}${dir_head_disp}\
+%{$terminfo[bold]$fg[yellow]%}${dir_tail_disp}%{$reset_color%}\
 ${git_info}\
  \
 %{$fg[white]%}%{$reset_color%}
