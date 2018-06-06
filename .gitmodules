@@ -1,3 +1,9 @@
 [submodule "custom/plugins/alias-tips"]
 	path = custom/plugins/alias-tips
 	url = https://github.com/djui/alias-tips
+[submodule "custom/plugins/zsh-completions"]
+	path = custom/plugins/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
+[submodule "custom/plugins/zsh-autosuggestions"]
+	path = custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
