@@ -58,8 +58,7 @@ function load_dir_injections(){
 
 # Ensure that the prompt is redrawn when the terminal size changes.
 TRAPWINCH() {
-  zle reset-prompt  
-  zle && zle -R
+  zle && { zle reset-prompt; zle -R }
 }
 
 # Force prompt redrawing during linit init hooks and on mode change.
